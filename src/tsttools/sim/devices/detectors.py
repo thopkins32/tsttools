@@ -1,3 +1,5 @@
+"""Detector device abstractions."""
+
 import asyncio
 from collections.abc import Sequence
 from typing import Annotated as Ann
