@@ -101,7 +101,7 @@ class XRTScreenHDFDataLogic(DetectorDataLogic):
                     data_key=datakey_name,
                     shape=shape,
                     dtype_numpy=np.dtype(np.float64).str,
-                    parameters={"dataset": "/entry/data/data"},
+                    parameters={"dataset": "/entry/data/data", "join_method": "stack"},
                     chunk_shape=(1, *shape),
                 ),
             ],
@@ -149,9 +149,10 @@ class XRTScreenAcquireLogic(DetectorAcquireLogic):
 class XRTScreenDetector(StandardDetector):
     """XRT screen as a detector."""
 
-    def __init__(self, prefix: str, path_provider: PathProvider, name: str = ""):
+    def __init__(self, prefix: str, datakey_suffix: str, path_provider: PathProvider, name: str = ""):
         self.driver = XRTScreenIO(prefix)
         data_logic = XRTScreenHDFDataLogic(self.driver, path_provider)
+        data_logic.datakey_suffix = datakey_suffix
         acquire_logic = XRTScreenAcquireLogic(self.driver)
         self.add_detector_logics(data_logic, acquire_logic)
         super().__init__(name)
