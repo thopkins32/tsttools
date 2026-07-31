@@ -17,9 +17,6 @@ from ophyd_async.core import (
     StreamResourceInfo,
     StrictEnum,
 )
-from ophyd_async.core import (
-    StandardReadableFormat as Format,
-)
 from ophyd_async.epics.core import EpicsDevice, PvSuffix, wait_for_good_state
 
 
